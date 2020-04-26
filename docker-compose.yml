@@ -1,0 +1,23 @@
+version: "3.5"
+
+services:
+  dynamodb:
+    image: cnadiminti/dynamodb-local
+    container_name: dynamodb
+    ports:
+      - "8000:8000"
+    networks:
+      - dynamodb-network
+  dynamodb-ui:
+    image:  aaronshaf/dynamodb-admin
+    container_name: dynamodb-ui
+    ports:
+      - "8001:8001"
+    environment:
+      - "DYNAMO_ENDPOINT=http://dynamodb:8000"
+    networks:
+      - dynamodb-network
+networks:
+  dynamodb-network:
+    name: dynamodb-network
+  
